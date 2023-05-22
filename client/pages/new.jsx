@@ -1,4 +1,8 @@
+// Pending:
+// check next.js API routes https://nextjs.org/docs/pages/building-your-application/data-fetching/building-forms 
+
 import Head from 'next/head';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import {
   Container,
   Row,
@@ -10,119 +14,75 @@ import {
   Input
 
 } from 'reactstrap'
+import { useState } from 'react'
+
+
 
 export default function New() {
+
+  const client = new ApolloClient({
+    uri: 'https://flyby-router-demo.herokuapp.com/',
+    cache: new InMemoryCache(),
+  });
+
+  const [npName, setnpName ] = useState('');
+  const [npBudget, setnpBudget ] = useState(0);
+  const [npTime, setnpTime ] = useState(0);
+  
+  const submitNewProject = async (event) =>{
+    
+    event.preventDefault();
+
+    const newObj ={
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+  
+          name: event.target.projectName.value,
+          time: event.target.projectTime.value,
+          budget: event.target.projectBudget.value
+
+      })
+    }
+    
+    const endpoint = 'http://localhost:3000/newproject'
+    fetch(endpoint,newObj)
+    .then(resp=>resp.json())
+    .then(data=>{console.log(data)})
+  }
+
   return (
     <Container className="md-container">
       <Head>
         <title>ReactJS with reactstrap</title>
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <Form>
+      <Form onSubmit={submitNewProject}>
       <Row>
-          <Col md={6}>
+          <Col md={4}>
           <FormGroup>
-              <Label for="exampleEmail">
-              Email
-              </Label>
-              <Input
-              id="exampleEmail"
-              name="email"
-              placeholder="with a placeholder"
-              type="email"
-              />
-          </FormGroup>
-          </Col>
-          <Col md={6}>
-          <FormGroup>
-              <Label for="examplePassword">
-              Password
-              </Label>
-              <Input
-              id="examplePassword"
-              name="password"
-              placeholder="password placeholder"
-              type="password"
-              />
-          </FormGroup>
-          </Col>
-      </Row>
-      <FormGroup>
-          <Label for="exampleAddress">
-          Address
-          </Label>
-          <Input
-          id="exampleAddress"
-          name="address"
-          placeholder="1234 Main St"
-          />
-      </FormGroup>
-      <FormGroup>
-          <Label for="exampleAddress2">
-          Address 2
-          </Label>
-          <Input
-          id="exampleAddress2"
-          name="address2"
-          placeholder="Apartment, studio, or floor"
-          />
-      </FormGroup>
-      <Row>
-          <Col md={6}>
-          <FormGroup>
-              <Label for="exampleCity">
-              City
-              </Label>
-              <Input
-              id="exampleCity"
-              name="city"
-              />
+              <Label for="projectName" htmlFor="projectName">Name</Label>
+              <Input id="projectName" name="projectName" placeholder="name your project" type="text"/>
           </FormGroup>
           </Col>
           <Col md={4}>
           <FormGroup>
-              <Label for="exampleState">
-              State
-              </Label>
-              <Input
-              id="exampleState"
-              name="state"
-              />
+          <Label for="projectBudget" htmlFor="projectBudget">Budget</Label>
+              <Input id="projectBudget" name="projectBudget" placeholder="aprox project budget" type="text"/>
           </FormGroup>
           </Col>
-          <Col md={2}>
+          <Col md={4}>
           <FormGroup>
-              <Label for="exampleZip">
-              Zip
-              </Label>
-              <Input
-              id="exampleZip"
-              name="zip"
-              />
+          <Label for="projectTime" htmlFor='projectTime'>Time</Label>
+              <Input id="projectTime" name="projectTime" placeholder="aprox project time" type="text"/>
           </FormGroup>
           </Col>
       </Row>
-      <FormGroup check>
-          <Input
-          id="exampleCheck"
-          name="check"
-          type="checkbox"
-          />
-          <Label
-          check
-          for="exampleCheck"
-          >
-          Check me out
-          </Label>
-      </FormGroup>
-      <Button>
-          Sign in
-      </Button>
-      </Form>
-
-      <footer className="cntr-footer">
-        <p> Powered by apedalmedia</p>
-      </footer>
+      <Button type="submit">Create project</Button>
+    </Form>
+      <footer className="cntr-footer"><p> Powered by apedalmedia</p></footer>
     </Container>
   )
 }

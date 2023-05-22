@@ -11,6 +11,7 @@ import {
   CardBody,
 } from 'reactstrap'
 
+
 export default function Home() {
   return (
     <Container className="md-container">
@@ -33,7 +34,7 @@ export default function Home() {
                   </CardText>
                   <Link
                     color="primary"
-                    href="pages/projects/new-project">
+                    href="/new">
                     Create &rarr;
                   </Link>
                 </CardBody>

@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
     "commit": "cz",
@@ -9,9 +9,12 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major"
+    
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "bootstrap": "^4.5.0",
+    "graphql": "^16.6.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
