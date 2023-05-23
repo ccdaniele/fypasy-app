@@ -2,7 +2,6 @@
 // check next.js API routes https://nextjs.org/docs/pages/building-your-application/data-fetching/building-forms 
 
 import Head from 'next/head';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import {
   Container,
   Row,
@@ -20,10 +19,6 @@ import { useState } from 'react'
 
 export default function New() {
 
-  const client = new ApolloClient({
-    uri: 'https://flyby-router-demo.herokuapp.com/',
-    cache: new InMemoryCache(),
-  });
 
   const [npName, setnpName ] = useState('');
   const [npBudget, setnpBudget ] = useState(0);
@@ -48,6 +43,7 @@ export default function New() {
     }
     
     const endpoint = 'http://localhost:3000/newproject'
+
     fetch(endpoint,newObj)
     .then(resp=>resp.json())
     .then(data=>{console.log(data)})

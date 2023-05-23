@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Link from 'next/link';
 import {
   Container,
@@ -13,6 +13,8 @@ import {
 
 
 export default function Home() {
+
+  
   return (
     <Container className="md-container">
       <Head>
