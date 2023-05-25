@@ -1,4 +1,4 @@
-class UserResourcesController < ApplicationController
+class Api::V1::UserResourcesController < ApplicationController
   before_action :set_user_resource, only: %i[ show update destroy ]
 
   # GET /user_resources

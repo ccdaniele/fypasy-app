@@ -1,4 +1,4 @@
-class TaskResourcesController < ApplicationController
+class Api::V1::TaskResourcesController < ApplicationController
   before_action :set_task_resource, only: %i[ show update destroy ]
 
   # GET /task_resources

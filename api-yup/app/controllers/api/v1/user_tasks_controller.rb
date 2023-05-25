@@ -1,4 +1,4 @@
-class UserTasksController < ApplicationController
+class Api::V1::UserTasksController < ApplicationController
   before_action :set_user_task, only: %i[ show update destroy ]
 
   # GET /user_tasks

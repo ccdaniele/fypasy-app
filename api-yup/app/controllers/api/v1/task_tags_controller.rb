@@ -1,4 +1,4 @@
-class TaskTagsController < ApplicationController
+class Api::V1::TaskTagsController < ApplicationController
   before_action :set_task_tag, only: %i[ show update destroy ]
 
   # GET /task_tags

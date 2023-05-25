@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
+  
   before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users
@@ -13,14 +14,25 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  # POST /users
-  def create
-    @user = User.new(user_params)
+  # # POST /users
+  # def create
+  #   @user = User.new(user_params)
+  #   debugger
+  #   if @user.save
+  #     render json: @user, status: :created, location: @user
+  #   else
+  #     render json: @user.errors, status: :unprocessable_entity
+  #   end
+  #   debugger
+  # end
 
-    if @user.save
-      render json: @user, status: :created, location: @user
+  def create
+    @user = User.create(user_params)
+    if @user.valid?
+      @token = encode_token({ user_id: @user.id })
+      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { error: 'failed to create user' }, status: :not_acceptable
     end
   end
 
@@ -46,6 +58,8 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_digest)
+      params.require(:user).permit(:username, :email, :password)
     end
 end
+
+

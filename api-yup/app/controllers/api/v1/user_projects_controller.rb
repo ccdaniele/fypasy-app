@@ -1,4 +1,4 @@
-class UserProjectsController < ApplicationController
+class Api::V1::UserProjectsController < ApplicationController
   before_action :set_user_project, only: %i[ show update destroy ]
 
   # GET /user_projects

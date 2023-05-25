@@ -1,4 +1,4 @@
-class ProjectTasksController < ApplicationController
+class Api::V1::ProjectTasksController < ApplicationController
   before_action :set_project_task, only: %i[ show update destroy ]
 
   # GET /project_tasks

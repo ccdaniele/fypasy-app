@@ -1,4 +1,4 @@
-class ProjectResourcesController < ApplicationController
+class Api::V1::ProjectResourcesController < ApplicationController
   before_action :set_project_resource, only: %i[ show update destroy ]
 
   # GET /project_resources

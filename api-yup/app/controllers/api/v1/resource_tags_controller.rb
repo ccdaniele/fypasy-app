@@ -1,4 +1,4 @@
-class ResourceTagsController < ApplicationController
+class Api::V1::ResourceTagsController < ApplicationController
   before_action :set_resource_tag, only: %i[ show update destroy ]
 
   # GET /resource_tags

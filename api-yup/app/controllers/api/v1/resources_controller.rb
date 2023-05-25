@@ -1,4 +1,4 @@
-class ResourcesController < ApplicationController
+class Api::V1::ResourcesController < ApplicationController
   before_action :set_resource, only: %i[ show update destroy ]
 
   # GET /resources

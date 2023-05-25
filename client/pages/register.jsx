@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Router from 'next/router'
 import {
   Container,
   Row,
@@ -11,8 +12,7 @@ import {
 
 } from 'reactstrap'
 
-export default function NewUser() {
-    
+export default function Register() {
 
     const submitNewUser = async (event) =>{
     
@@ -24,19 +24,19 @@ export default function NewUser() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-    
             username: event.target.nuUsername.value,
             email: event.target.nuEmail.value,
             password: event.target.nuPassword.value
 
-
         })
         }
         
-        const endpoint = 'http://localhost:3000/newproject'
+        const endpoint = 'http://localhost:3000/api/v1/users'
         fetch(endpoint,newObj)
         .then(resp=>resp.json())
         .then(data=>{console.log(data,'new user created')})
+        Router.push('/')
+        
     }
 
   return (

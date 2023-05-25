@@ -1,4 +1,4 @@
-class ProjectTagsController < ApplicationController
+class Api::V1::ProjectTagsController < ApplicationController
   before_action :set_project_tag, only: %i[ show update destroy ]
 
   # GET /project_tags
